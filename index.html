@@ -14,11 +14,11 @@
     theme: {
       extend: {
         colors: {
-          background: "var(--color-bg)",
-          primary: "var(--color-primary)",
-          secondary: "var(--color-secondary)",
-          accent: "var(--color-accent)",
-          surface: "var(--color-surface)"
+          background: "rgb(var(--color-bg) / <alpha-value>)",
+          primary: "rgb(var(--color-primary) / <alpha-value>)",
+          secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+          accent: "rgb(var(--color-accent) / <alpha-value>)",
+          surface: "rgb(var(--color-surface) / <alpha-value>)"
         },
         fontFamily: {
           serif: ['Playfair Display', 'serif'],
@@ -38,11 +38,13 @@
      0. HỆ THỐNG MÀU SẮC ĐỘNG (LIGHT / DARK MODE)
      ========================================== */
   :root {
-    --color-bg: #EBF2F6;
-    --color-primary: #142534;
-    --color-secondary: #7A98AF;
-    --color-accent: #C5D5E4;
-    --color-surface: #FDFDFD;
+    /* Dùng hệ số RGB để Tailwind tính toán độ trong suốt (opacity) */
+    --color-bg: 235, 242, 246;       /* #EBF2F6 */
+    --color-primary: 20, 37, 52;     /* #142534 */
+    --color-secondary: 122, 152, 175;/* #7A98AF */
+    --color-accent: 197, 213, 228;   /* #C5D5E4 */
+    --color-surface: 253, 253, 253;  /* #FDFDFD */
+    
     --intro-grad-1: #A2C0D4;
     --intro-grad-2: #5E85A1;
     --intro-petal: rgba(235, 242, 246, 0.95);
@@ -51,15 +53,24 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-bg: #0B1117; 
-      --color-primary: #E2E8F0; 
-      --color-secondary: #8BA4B8; 
-      --color-accent: #334B5E; 
-      --color-surface: #121A24; 
+      /* Nền tối sâu nhưng êm dịu, không gây mỏi mắt */
+      --color-bg: 15, 23, 30;        
+      
+      /* Bề mặt (Card/Drawer) sáng hơn nền một bậc để phân rõ bố cục */
+      --color-surface: 24, 34, 44;   
+      
+      /* Chữ chính và Biểu tượng: Trắng ngà bảo vệ mắt, rất rõ nét nhưng không chói */
+      --color-primary: 226, 232, 240;
+      
+      /* Chữ phụ trợ: Xám xanh thanh lịch */
+      --color-secondary: 148, 163, 184;
+      
+      --color-accent: 51, 75, 94;    
+
       --intro-grad-1: #1E2D3D;
       --intro-grad-2: #0B1117;
       --intro-petal: rgba(226, 232, 240, 0.85);
-      --intro-light: #121A24;
+      --intro-light: #18222C;
     }
   }
 
@@ -543,7 +554,7 @@
 
         .card-img-wrapper {
   border-radius: 1.5rem; 
-  background: var(--color-surface); 
+  background: rgb(var(--color-surface)); 
   position: relative; 
   overflow: hidden; 
   aspect-ratio: 4/5;
@@ -553,8 +564,9 @@
 
 @media (prefers-color-scheme: dark) {
   .card-img-wrapper {
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02);
+    /* Viền cực mỏng và lớp bóng đổ êm ái tôn vinh hình ảnh */
+    border: 1px solid rgba(226, 232, 240, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -573,8 +585,9 @@
   
   @media (prefers-color-scheme: dark) {
     .product-card:hover .card-img-wrapper {
-       box-shadow: 0 15px 40px rgba(122, 152, 175, 0.15), 0 0 15px rgba(255, 255, 255, 0.05);
-       border-color: rgba(255, 255, 255, 0.1);
+       /* Ánh sáng hắt ra nhẹ nhàng khi người dùng tương tác */
+       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(148, 163, 184, 0.08);
+       border-color: rgba(226, 232, 240, 0.15);
     }
   }
 }
