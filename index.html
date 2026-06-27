@@ -10,25 +10,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
-  tailwind.config = {
-    darkMode: 'media', // Tự động đồng bộ với thiết bị của khách hàng
-    theme: {
-      extend: {
-        colors: {
-          background: "var(--color-bg)",
-          primary: "var(--color-primary)",
-          secondary: "var(--color-secondary)",
-          accent: "var(--color-accent)",
-          surface: "var(--color-surface)"
-        },
-        fontFamily: {
-          serif: ['Playfair Display', 'serif'],
-          sans: ['Inter', 'sans-serif'],
+        tailwind.config = {
+            darkMode: 'media', // Tự động đồng bộ với thiết bị của khách hàng
+            theme: {
+                extend: {
+                    colors: {
+                        background: "var(--color-bg)",
+                        primary: "var(--color-primary)",
+                        secondary: "var(--color-secondary)",
+                        accent: "var(--color-accent)",
+                        surface: "var(--color-surface)"
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
         }
-      }
-    }
-  }
-</script>
+    </script>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
@@ -36,76 +36,169 @@
 
     <style>
         /* ==========================================
-   0. BẢNG MÀU ĐỘNG & NÚT BẤM (LIGHT / DARK MODE)
-   ========================================== */
-:root {
-  /* CHẾ ĐỘ SÁNG */
-  --color-bg: #EBF2F6;
-  --color-primary: #142534;
-  --color-secondary: #7A98AF;
-  --color-accent: #C5D5E4;
-  --color-surface: #FDFDFD;
-  --color-footer-bg: #142534;
-  --color-footer-text: #FFFFFF;
-}
+        0. BẢNG MÀU ĐỘNG & KIỂM SOÁT ĐẢO NGƯỢC (DARK MODE ENGINE)
+        ========================================== */
+        :root {
+            /* CHẾ ĐỘ SÁNG (Bản gốc vững chãi) */
+            --color-bg: #EBF2F6;
+            --color-primary: #142534;
+            --color-secondary: #7A98AF;
+            --color-accent: #C5D5E4;
+            --color-surface: #FDFDFD;
+            --color-footer-bg: #142534;
+            --color-footer-text: #FFFFFF;
+        }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* CHẾ ĐỘ TỐI - PHÒNG TRƯNG BÀY BAN ĐÊM */
-    --color-bg: #070D14;      
-    --color-surface: #0E1824; 
-    --color-primary: #E8F0F6; 
-    --color-secondary: #A9C2D9;
-    --color-accent: #1C3042;
-    --color-footer-bg: #04080D;
-    --color-footer-text: #E8F0F6;
-  }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* CHẾ ĐỘ TỐI (Phòng trưng bày ban đêm) */
+                --color-bg: #070D14;
+                --color-surface: #0E1824;
+                --color-primary: #E8F0F6;
+                --color-secondary: #A9C2D9;
+                --color-accent: #2A4359;
+                --color-footer-bg: #04080D;
+                --color-footer-text: #E8F0F6;
+            }
 
-  .card-img-wrapper { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important; }
-  #cart-drawer, #auth-drawer { box-shadow: -20px 0 50px rgba(0, 0, 0, 0.6) !important; }
-  .toast-card { background: rgba(14, 24, 36, 0.85) !important; border-left-color: var(--color-primary) !important; }
-  #luxury-intro { background: radial-gradient(circle at 50% 50%, #1A2A3A 0%, #070D14 100%) !important; }
-  .petal-intro { box-shadow: 0 0 20px rgba(232, 240, 246, 0.1) !important; }
-  .light-burst { background: #070D14 !important; box-shadow: 0 0 100px 50px #070D14 !important; }
-}
+            /* 1. KHẮC PHỤC THANH TÁC VỤ (HEADER) BỊ TRẮNG TINH */
+            /* Ép thanh cuộn phải dùng màu mặt kính tối để không che mất Giỏ hàng */
+            header.scrolled {
+                background: rgba(14, 24, 36, 0.95) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            }
 
-/* Nút Glass (Thêm Giỏ, FB) */
-.btn-luxury-glass {
-  background-color: var(--color-surface);
-  color: var(--color-primary);
-  border: 1px solid var(--color-accent);
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.btn-luxury-glass:hover {
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-}
+            /* 2. KHẮC PHỤC CHỮ SLIDE (HOA TƯƠI, HOA SÁP) BỊ TỐI */
+            /* Tạo hiệu ứng phát sáng kim loại (Pearl Blue) để chữ bật lên khỏi nền ảnh tối */
+            .slide .text-accent {
+                color: #BBD2E3 !important;
+                text-shadow: 0 0 20px rgba(187, 210, 227, 0.5);
+            }
 
-/* Nút Solid (Liên Hệ, Zalo) */
-.btn-luxury-solid {
-  background-color: var(--color-primary);
-  color: var(--color-bg);
-  border: 1px solid var(--color-primary);
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.btn-luxury-solid:hover {
-  background-color: transparent;
-  color: var(--color-primary);
-}
+            /* 3. KHẮC PHỤC NÚT DANH MỤC BỊ HÒA LẪN */
+            .cat-btn {
+                color: var(--color-secondary) !important;
+            }
+
+            .cat-btn.active,
+            .cat-btn:hover {
+                color: var(--color-primary) !important;
+            }
+
+            .cat-btn::after {
+                background-color: var(--color-primary) !important;
+            }
+
+            /* 4. KHẮC PHỤC NÚT GIỎ HÀNG & ĐĂNG NHẬP (TRẮNG ĐÈ TRẮNG) */
+            /* Phép thuật CSS: Tự động đảo màu chữ thành Xanh bóng đêm mà KHÔNG cần sửa HTML */
+            button.bg-primary.text-white {
+                background-color: var(--color-primary) !important;
+                color: var(--color-bg) !important;
+                border: 1px solid var(--color-primary) !important;
+            }
+
+            button.bg-primary.text-white:hover {
+                background-color: transparent !important;
+                color: var(--color-primary) !important;
+            }
+
+            /* 5. CỨU HỘ CÁC THÀNH PHẦN VI MÔ KHÁC (MICRO-UI) */
+            /* Số lượng giỏ hàng (Cart Badge) */
+            .cart-badge {
+                background-color: var(--color-primary) !important;
+                color: var(--color-bg) !important;
+            }
+
+            header.hero-mode .cart-badge {
+                background-color: var(--color-surface) !important;
+                color: var(--color-primary) !important;
+            }
+
+            /* Nút cộng/trừ số lượng (Qty Buttons) */
+            .qty-btn {
+                border-color: var(--color-secondary) !important;
+                color: var(--color-primary) !important;
+            }
+
+            .qty-btn:hover {
+                background-color: var(--color-primary) !important;
+                color: var(--color-bg) !important;
+            }
+
+            /* Chữ trong Form nhập liệu */
+            .elegant-input {
+                color: var(--color-primary) !important;
+            }
+
+            /* Độ sâu của nghệ thuật (Shadows & Kính mờ) */
+            .card-img-wrapper {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+            }
+
+            #cart-drawer,
+            #auth-drawer {
+                box-shadow: -20px 0 50px rgba(0, 0, 0, 0.8) !important;
+            }
+
+            .toast-card {
+                background: rgba(14, 24, 36, 0.9) !important;
+                border-left-color: var(--color-primary) !important;
+            }
+
+            #luxury-intro {
+                background: radial-gradient(circle at 50% 50%, #1A2A3A 0%, #070D14 100%) !important;
+            }
+
+            .petal-intro {
+                box-shadow: 0 0 20px rgba(232, 240, 246, 0.1) !important;
+            }
+
+            .light-burst {
+                background: #070D14 !important;
+                box-shadow: 0 0 100px 50px #070D14 !important;
+            }
+        }
+
+        /* --- ĐỊNH NGHĨA NÚT BẤM LUXURY CHO GIAO DIỆN KHÁCH HÀNG --- */
+        .btn-luxury-glass {
+            background-color: var(--color-surface);
+            color: var(--color-primary);
+            border: 1px solid var(--color-accent);
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn-luxury-glass:hover {
+            background-color: var(--color-primary);
+            color: var(--color-bg);
+        }
+
+        .btn-luxury-solid {
+            background-color: var(--color-primary);
+            color: var(--color-bg);
+            border: 1px solid var(--color-primary);
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .btn-luxury-solid:hover {
+            background-color: transparent;
+            color: var(--color-primary);
+        }
 
         /* ==========================================
            1. BASE & SCROLL LOCK
            ========================================== */
         /* 1. XÓA THANH CUỘN TOÀN CỤC NHƯNG VẪN CHO PHÉP CUỘN MƯỢT MÀ */
-        html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  background-color: var(--color-bg); /* ĐÃ SỬA TỪ #EBF2F6 */
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background-color: var(--color-bg);
+            /* ĐÃ SỬA TỪ #EBF2F6 */
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
 
         ::-webkit-scrollbar {
             display: none;
@@ -135,13 +228,15 @@
 
         /* 2. TIÊU DIỆT LỚP ÁM XANH/VÀNG AUTOFILL CỦA TRÌNH DUYỆT TRÊN FORM */
         input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset !important; /* ĐÃ SỬA */
-  -webkit-text-fill-color: var(--color-primary) !important; /* ĐÃ SỬA */
-  transition: background-color 5000s ease-in-out 0s;
-}
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset !important;
+            /* ĐÃ SỬA */
+            -webkit-text-fill-color: var(--color-primary) !important;
+            /* ĐÃ SỬA */
+            transition: background-color 5000s ease-in-out 0s;
+        }
 
         /* 3. TIÊU DIỆT CON MẮT VÀ NÚT XÓA MẶC ĐỊNH TRÊN Ô PASSWORD */
         input[type="password"]::-ms-reveal,
@@ -514,16 +609,17 @@ input:-webkit-autofill:active {
         }
 
         .magnetic-btn::before {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-bg); /* ĐÃ SỬA */
-  transition: top 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  z-index: -1;
-}
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--color-bg);
+            /* ĐÃ SỬA */
+            transition: top 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: -1;
+        }
 
         @media (hover: hover) {
             .magnetic-btn:hover::before {
@@ -531,21 +627,24 @@ input:-webkit-autofill:active {
             }
 
             .magnetic-btn:hover {
-    color: var(--color-primary) !important; /* ĐÃ SỬA */
-    border-color: var(--color-bg) !important; /* ĐÃ SỬA */
-    transform: scale(1.05);
-  }
+                color: var(--color-primary) !important;
+                /* ĐÃ SỬA */
+                border-color: var(--color-bg) !important;
+                /* ĐÃ SỬA */
+                transform: scale(1.05);
+            }
         }
 
         /* ==========================================
            5. BOUTIQUE COLLECTION & PRODUCT GRID
            ========================================== */
         #boutique-section {
-  background-color: var(--color-surface); /* ĐÃ SỬA TỪ #FDFDFD */
-  position: relative;
-  z-index: 20;
-  min-height: 100vh;
-}
+            background-color: var(--color-surface);
+            /* ĐÃ SỬA TỪ #FDFDFD */
+            position: relative;
+            z-index: 20;
+            min-height: 100vh;
+        }
 
         .cat-btn {
             position: relative;
@@ -554,15 +653,15 @@ input:-webkit-autofill:active {
         }
 
         .cat-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: var(--color-primary) !important;
-    transition: width 0.4s ease;
-}
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-primary) !important;
+            transition: width 0.4s ease;
+        }
 
         .cat-btn.active,
         .cat-btn:hover {
@@ -591,14 +690,15 @@ input:-webkit-autofill:active {
         }
 
         .card-img-wrapper {
-  border-radius: 1.5rem;
-  background: var(--color-bg); /* ĐÃ SỬA TỪ #EBF2F6 */
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4/5;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition: box-shadow 0.4s ease;
-}
+            border-radius: 1.5rem;
+            background: var(--color-bg);
+            /* ĐÃ SỬA TỪ #EBF2F6 */
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/5;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            transition: box-shadow 0.4s ease;
+        }
 
         .card-img-wrapper img {
             width: 100%;
@@ -675,21 +775,22 @@ input:-webkit-autofill:active {
         }
 
         .pagination-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 1px solid var(--color-primary) !important;
-    color: var(--color-primary) !important;
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.pagination-btn:hover {
-    background-color: var(--color-primary) !important;
-    color: var(--color-bg) !important;
-    transform: scale(1.05);
-}
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--color-primary) !important;
+            color: var(--color-primary) !important;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .pagination-btn:hover {
+            background-color: var(--color-primary) !important;
+            color: var(--color-bg) !important;
+            transform: scale(1.05);
+        }
 
         .pagination-btn:disabled {
             opacity: 0;
@@ -717,15 +818,17 @@ input:-webkit-autofill:active {
             pointer-events: auto;
         }
 
-        #cart-drawer, #auth-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  max-width: 450px;
-  background: var(--color-surface); /* ĐÃ SỬA TỪ #FDFDFD */
-  z-index: 101;
+        #cart-drawer,
+        #auth-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            max-width: 450px;
+            background: var(--color-surface);
+            /* ĐÃ SỬA TỪ #FDFDFD */
+            z-index: 101;
             transform: translateX(100%);
             /* Bổ sung visibility để ẩn bóng hoàn toàn khi đóng */
             visibility: hidden;
@@ -944,16 +1047,17 @@ input:-webkit-autofill:active {
         }
 
         .luxury-checkbox:checked::after {
-  content: '';
-  width: 5px;
-  height: 10px;
-  border: solid var(--color-surface); /* ĐÃ SỬA TỪ #FFFFFF ĐỂ ĐỒNG BỘ */
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  position: absolute;
-  top: 3px;
-  animation: checkmark 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
+            content: '';
+            width: 5px;
+            height: 10px;
+            border: solid var(--color-surface);
+            /* ĐÃ SỬA TỪ #FFFFFF ĐỂ ĐỒNG BỘ */
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            position: absolute;
+            top: 3px;
+            animation: checkmark 0.3s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
 
         @keyframes checkmark {
             0% {
@@ -1315,8 +1419,9 @@ input:-webkit-autofill:active {
     </section>
 
     <!-- FOOTER -->
-    <footer class="w-full py-16 px-6 md:px-16 lg:px-24" style="background-color: var(--color-footer-bg); color: var(--color-footer-text);">
-    <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+    <footer class="w-full py-16 px-6 md:px-16 lg:px-24"
+        style="background-color: var(--color-footer-bg); color: var(--color-footer-text);">
+        <div class="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
 
             <div class="font-serif text-3xl font-semibold tracking-widest shrink-0">Tiệm hoa nhỏ của Kem</div>
 
@@ -1690,13 +1795,15 @@ input:-webkit-autofill:active {
             <p class="text-sm text-primary/70 font-light mb-8">Bạn muốn tùy chỉnh sản phẩm hoặc đặt thiết kế riêng?
                 Hãy kết nối với Kem.</p>
             <div class="flex flex-col gap-4">
-    <a href="https://zalo.me/0969670034" target="_blank" class="btn-luxury-solid flex items-center justify-center gap-3 w-full py-4 text-[11px] font-semibold tracking-[0.2em] uppercase rounded-full hover-scale">
-        Zalo (0969.670.034)
-    </a>
-    <a href="https://www.facebook.com/share/1BmFyRgbfj/" target="_blank" class="btn-luxury-glass flex items-center justify-center gap-3 w-full py-4 text-[11px] font-semibold tracking-[0.2em] uppercase rounded-full hover-scale">
-        Facebook Messenger
-    </a>
-</div>
+                <a href="https://zalo.me/0969670034" target="_blank"
+                    class="btn-luxury-solid flex items-center justify-center gap-3 w-full py-4 text-[11px] font-semibold tracking-[0.2em] uppercase rounded-full hover-scale">
+                    Zalo (0969.670.034)
+                </a>
+                <a href="https://www.facebook.com/share/1BmFyRgbfj/" target="_blank"
+                    class="btn-luxury-glass flex items-center justify-center gap-3 w-full py-4 text-[11px] font-semibold tracking-[0.2em] uppercase rounded-full hover-scale">
+                    Facebook Messenger
+                </a>
+            </div>
             <button onclick="closeContact()"
                 class="absolute top-6 right-6 text-primary/50 hover:text-primary hover:rotate-90 transition-all duration-300">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
