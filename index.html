@@ -35,15 +35,15 @@
 
     <style>
         /* ==========================================
-     0. HỆ THỐNG MÀU SẮC ĐỘNG (LIGHT / DARK MODE)
+     0. HỆ THỐNG MÀU SẮC ĐỘNG (LUXURY LIGHT / DARK MODE)
      ========================================== */
   :root {
-    /* Dùng hệ số RGB để Tailwind tính toán độ trong suốt (opacity) */
-    --color-bg: 235, 242, 246;       /* #EBF2F6 */
-    --color-primary: 20, 37, 52;     /* #142534 */
-    --color-secondary: 122, 152, 175;/* #7A98AF */
-    --color-accent: 197, 213, 228;   /* #C5D5E4 */
-    --color-surface: 253, 253, 253;  /* #FDFDFD */
+    /* --- BẢN NGÀY (LIGHT MODE) - THANH LỊCH & SÁNG SỦA --- */
+    --color-bg: 235, 242, 246;       
+    --color-primary: 20, 37, 52;     
+    --color-secondary: 122, 152, 175;
+    --color-accent: 197, 213, 228;   
+    --color-surface: 253, 253, 253;  
     
     --intro-grad-1: #A2C0D4;
     --intro-grad-2: #5E85A1;
@@ -53,24 +53,55 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      /* Nền tối sâu nhưng êm dịu, không gây mỏi mắt */
-      --color-bg: 15, 23, 30;        
+      /* --- BẢN ĐÊM (DARK MODE) - ĐẲNG CẤP THẾ GIỚI --- */
       
-      /* Bề mặt (Card/Drawer) sáng hơn nền một bậc để phân rõ bố cục */
-      --color-surface: 24, 34, 44;   
+      /* 1. Nền Đen Tuyệt Đối (OLED Pure Black) để hòa tan vào viền thiết bị */
+      --color-bg: 0, 0, 0;        
       
-      /* Chữ chính và Biểu tượng: Trắng ngà bảo vệ mắt, rất rõ nét nhưng không chói */
-      --color-primary: 226, 232, 240;
+      /* 2. Bề Mặt Nổi (Elevation 1): Xám than cực tối, tạo sự tách biệt tinh tế */
+      --color-surface: 18, 18, 18;   
       
-      /* Chữ phụ trợ: Xám xanh thanh lịch */
-      --color-secondary: 148, 163, 184;
+      /* 3. Chữ Chính (Anti-Halation): Trắng ngà ánh bạc của Apple (#F5F5F7), không gây chói */
+      --color-primary: 245, 245, 247;
       
-      --color-accent: 51, 75, 94;    
+      /* 4. Chữ Phụ/Icon: Xám dịu (#86868B) rất êm mắt */
+      --color-secondary: 134, 134, 139;
+      
+      /* 5. Điểm nhấn: Xám kim loại tối */
+      --color-accent: 44, 44, 46;    
 
-      --intro-grad-1: #1E2D3D;
-      --intro-grad-2: #0B1117;
-      --intro-petal: rgba(226, 232, 240, 0.85);
-      --intro-light: #18222C;
+      --intro-grad-1: #000000;
+      --intro-grad-2: #111111;
+      --intro-petal: rgba(245, 245, 247, 0.85);
+      --intro-light: #1A1A1A;
+    }
+
+    /* ĐẶC QUYỀN 1: IMAGE ANTI-GLARE (Chống lóa hình ảnh vào ban đêm) */
+    img:not(.hero-bg) {
+      filter: brightness(0.85) contrast(1.05);
+      transition: filter 0.5s ease;
+    }
+
+    /* ĐẶC QUYỀN 2: CHUYỂN BÓNG ĐỔ THÀNH ĐƯỜNG VIỀN KÍNH */
+    .bg-surface, #cart-drawer, #auth-drawer, .glass-panel {
+       box-shadow: none !important;
+       border-left: 1px solid rgba(255, 255, 255, 0.08);
+       background-color: rgb(var(--color-surface));
+    }
+
+    /* ĐẶC QUYỀN 3: TRIỆT TIÊU ĐỘ CHÓI CỦA CÁC ĐƯỜNG PHÂN CÁCH TRONG TAILWIND */
+    .border-primary\/10, .border-primary\/5, .border-primary\/20 {
+       border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    
+    .bg-primary\/5 {
+       background-color: rgba(255, 255, 255, 0.04) !important;
+    }
+
+    /* Làm dịu nền ô nhập liệu */
+    .elegant-input {
+       color: rgb(var(--color-primary));
+       border-bottom-color: rgba(255, 255, 255, 0.15);
     }
   }
 
@@ -564,9 +595,9 @@
 
 @media (prefers-color-scheme: dark) {
   .card-img-wrapper {
-    /* Viền cực mỏng và lớp bóng đổ êm ái tôn vinh hình ảnh */
-    border: 1px solid rgba(226, 232, 240, 0.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    /* Chỉ dùng viền kính 4%, không dùng shadow vì nền là màu đen tuyệt đối */
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: none; 
   }
 }
 
@@ -585,9 +616,14 @@
   
   @media (prefers-color-scheme: dark) {
     .product-card:hover .card-img-wrapper {
-       /* Ánh sáng hắt ra nhẹ nhàng khi người dùng tương tác */
-       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(148, 163, 184, 0.08);
-       border-color: rgba(226, 232, 240, 0.15);
+       /* Khi di chuột, sản phẩm phát sáng bằng viền 15% thay vì shadow lầy lội */
+       border-color: rgba(255, 255, 255, 0.15);
+       box-shadow: none;
+    }
+    
+    /* Trả lại độ rực rỡ tự nhiên cho bức ảnh khi khách hàng chủ động hover */
+    .product-card:hover .card-img-wrapper img {
+       filter: brightness(1) contrast(1);
     }
   }
 }
